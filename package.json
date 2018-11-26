@@ -1,0 +1,22 @@
+{
+  "name": "docx-report-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MishaHnatyshyn/docx-report-builder.git"
+  },
+  "author": "Misha Hnatyshyn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MishaHnatyshyn/docx-report-builder/issues"
+  },
+  "homepage": "https://github.com/MishaHnatyshyn/docx-report-builder#readme",
+  "dependencies": {
+    "docx4js": "^3.1.13"
+  }
+}
