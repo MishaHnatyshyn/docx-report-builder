@@ -31,14 +31,7 @@ for (const row of table.slice(13)){
 docx4js.load('test1.docx').then(docx => {
   for (let i = 0; i < docx.officeDocument.content("w\\:t").length; i++) {
     const child = docx.officeDocument.content("w\\:t")[i].children[0];
-    const fields = Object.assign(document.header, document.rows[1] )
-    for (const val in fields) {
-      if (child.data.indexOf(val) > -1) {
-        child.data = fields[val]
-        // console.log(val, child.data, fields[val] )
-        break;
-      }
-    }
+    console.log(child.data)
   }
-  docx.save("changed1.docx")
+  // docx.save("changed1.docx")
 });

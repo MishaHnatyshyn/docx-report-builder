@@ -1,9 +1,21 @@
 const express = require('express');
 const multer = require('multer');
+const docx4js = require("docx4js");
+const bodyParser = require('body-parser');
 const fs = require('fs');
 const XLSXParser = require('./XLSXParser');
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+let docxTemplate = null;
+
+docx4js.load('test1.docx').then(docx => {
+  docxTemplate = docx;
+  app.listen(8080, () => console.log('Listening on port 8080!'));
+});
 
 const storage = multer.diskStorage({
   destination: './files',
@@ -18,7 +30,6 @@ app.use(express.static('dist'));
 app.use(express.static('files'));
 
 app.post('/api/xlsx/upload', upload.single('file'), (req, res) => {
-  console.log(req.file);
   const data = XLSXParser(req.file.path)
   fs.unlink(req.file.path,function(err){
     if(err) return console.log(err);
@@ -27,4 +38,21 @@ app.post('/api/xlsx/upload', upload.single('file'), (req, res) => {
   res.json(data)
 })
 
-app.listen(8080, () => console.log('Listening on port 8080!'));
+app.post('/api/report/build', (req, res) => {
+  const fields = req.body;
+  console.log(fields)
+
+  for (let i = 0; i < docxTemplate.officeDocument.content("w\\:t").length; i++) {
+    const child = docxTemplate.officeDocument.content("w\\:t")[i].children[0];
+    for (const val in fields) {
+      if (child.data.indexOf(val) > -1) {
+        child.data = fields[val]
+        console.log(val, child.data, fields[val] )
+        break;
+      }
+    }
+  }
+  const filename = `${new Date()}-report.docx`;
+  docxTemplate.save(`files/${filename}`);
+  res.json({ status: 1, filename })
+});

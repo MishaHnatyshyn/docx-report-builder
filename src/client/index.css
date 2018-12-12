@@ -1,0 +1,54 @@
+.form-table{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.download-popup{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.all-data, .all-data td, .all-data th {
+    border: 1px solid black;
+}
+
+.all-data {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.all-data th {
+    text-align: left;
+}
+
+.input-form{
+    border-collapse: collapse;
+}
+
+.input-form, .input-form td, .input-form th {
+    border: 1px solid black;
+}
+
+.input-form td{
+    height: 30px;
+    width: 200px;
+}
+
+.input-form input, .input-form select{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.input-form input{
+    border: none;
+}
+
+.blank-cell{
+    background: lightgray;
+}
