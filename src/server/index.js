@@ -10,11 +10,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const port = process.env.PORT || 8080
+
 let docxTemplate = null;
 
 docx4js.load('test1.docx').then(docx => {
   docxTemplate = docx;
-  app.listen(8080, () => console.log('Listening on port 8080!'));
+  app.listen(port, () => console.log(`Listening on port ${port}!`));
 });
 
 const storage = multer.diskStorage({
